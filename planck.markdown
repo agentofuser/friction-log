@@ -12,6 +12,21 @@
   binaries to make sure `plk` wasn't just a symlink
 - It wasn't
 
+It seems like `plk` is a front-end for `planck`. Running `plk -h` yields this:
+
+```
+The plk script is a runner for Planck which ultimately constructs and
+invokes a command-line of the form:
+
+planck --classpath classpath [init-opt*] [main-opt] [arg*]
+```
+
+- Key word there is "runner".
+- I think `plk` integrates `planck` with the Java-based Clojure tools, whereas
+  `planck` on its own doesn't require either Java or Node.
+- I don't want to mix up too many new concepts for now, so I'll leave `plk` for
+  later and go with my lazy `alias c=planck`.
+
 ## Hello world
 
 - First friction log ever
