@@ -2,8 +2,9 @@
 ** 2019
 *** February
 **** <2019-02-06 Wed>
-***** Finished reading /Learn You a Haskell for Great Good/         :lyahfgg:
+***** Finished reading /[[http://learnyouahaskell.com][Learn You a Haskell for Great Good]]/. :lyahfgg:
 ****** All on the phone during small otherwise-useless moments in daily life.
 ****** A page a day sometimes. Took me months.
 ****** Didn't write a single line of code, just getting the general idea. Liked the book.
 ****** Wrote a bit more about it on [[https://viewer.scuttlebot.io/%2525%252FsE5Z7f2QIlsBBdsecIC5aMsroE%252Btvl147t7WiOnC7o%253D.sha256][scuttlebutt]].
+****** Here is the link to download it: [[https://gitlab.com/agentofuser/friction-log/blob/bc79c524f6e346ba9c48f2297b71f55efc9259cf/assets/lyahfgg-en.epub][lyahfgg-en.epub]].
