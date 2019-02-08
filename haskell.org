@@ -72,7 +72,7 @@
 ****** And that was just for installing binaries for Spacemacs.
 ****** Trying to use cabal2nix for the default hakyll-init project be crazy.
 ****** Decided to back down a little and figure out one tool at a time.
-****** I went with the *stack* instructions in the tutorial and it worked.
+****** I went with the *stack* instructions in the [[https://jaspervdj.be/hakyll/tutorials/01-installation.html][tutorial]] and it worked.
 ****** Cabal was interacting weirdly with nix and system libraries.
 ****** Stack does everything in a per-project isolated way, so that helped.
 ****** I think cabal does too, but I dunno, stack "just worked." Moving on.
