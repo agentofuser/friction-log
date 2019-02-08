@@ -5,6 +5,78 @@
 ***** Finished reading /[[http://learnyouahaskell.com][Learn You a Haskell for Great Good]]/. :lyahfgg:
 ****** All on the phone during small otherwise-useless moments in daily life.
 ****** A page a day sometimes. Took me months.
-****** Didn't write a single line of code, just getting the general idea. Liked the book.
-****** Wrote a bit more about it on [[https://viewer.scuttlebot.io/%2525%252FsE5Z7f2QIlsBBdsecIC5aMsroE%252Btvl147t7WiOnC7o%253D.sha256][scuttlebutt]].
-****** Here is the link to download it: [[https://gitlab.com/agentofuser/friction-log/blob/bc79c524f6e346ba9c48f2297b71f55efc9259cf/assets/lyahfgg-en.epub][lyahfgg-en.epub]].
+****** Didn't write single line of code, just getting general idea. Good book.
+****** Wrote a bit more about it on [[https://viewer.heropunch.io/%2525%252FsE5Z7f2QIlsBBdsecIC5aMsroE%252Btvl147t7WiOnC7o%253D.sha256][scuttlebutt]].
+****** Here is the link to download the book: [[https://gitlab.com/agentofuser/friction-log/blob/bc79c524f6e346ba9c48f2297b71f55efc9259cf/assets/lyahfgg-en.epub][lyahfgg-en.epub]].
+***** Going to move agentofuser.com from Gatsby to Hakyll for kicks.
+**** <2019-02-07 Thu>
+***** A little confused about cabal vs stack vs nix.
+***** It seems like stack is cabal+sugar, and nix+cabal obviates need for it.
+***** Reading up on nix now. Had it installed but never really made much of it.
+***** Goal is get Hakyll installed & start new Hakyll project "the right way."
+***** Snag (fixed): tried installing hakyll
+****** Ran this:
+       : nix-env -iA nixpkgs.haskellPackages.hakyll
+****** Got this error:
+        #+begin_example
+       installing 'hakyll-4.12.5.0' building
+       '/nix/store/rpj2vm5q9n7xxzwga2pjffjk7qzscfkd-user-environment.drv'...
+       error: packages
+       '/nix/store/cfjhwsb4c2xjzpsyzyzmm3kwf1yjjjvc-cabal-install-2.4.1.0/lib/links/libHSdigest-0.0.1.2-93hmxvQ2VB3FeV97QkdTpW-ghc8.6.3.dylib'
+       and
+       '/nix/store/9nfajhaaxyak7mxgsss236hf34fq8ifh-hakyll-4.12.5.0/lib/links/libHSdigest-0.0.1.2-93hmxvQ2VB3FeV97QkdTpW-ghc8.6.3.dylib'
+       have the same priority 5; use 'nix-env --set-flag priority NUMBER
+       INSTALLED_PKGNAME' to change the priority of one of the conflicting
+       packages (0 being the highest priority) builder for
+       '/nix/store/rpj2vm5q9n7xxzwga2pjffjk7qzscfkd-user-environment.drv' failed
+       with exit code 1 error: build of
+       '/nix/store/rpj2vm5q9n7xxzwga2pjffjk7qzscfkd-user-environment.drv' failed
+       #+end_example
+****** Found it's an [[https://github.com/NixOS/nixpkgs/issues/41069][open error]]. What now?
+****** Got side-tracked and read a bunch about [[https://dhall-lang.org][Dhall]]. Sweet website!
+****** It seems like a good idea to learn Dhall and avoid the Nix language.
+****** Fixed:
+******* The conflict was likely due to running 2 installs concurrently.
+******* Removed both ~cabal-install~ and ~hakyll~ with ~nid-env -e~.
+******* Reinstalled one at a time, then it worked. Duh.
+******* Package managers generally have a lockfile to prevent concurrent use.
+******* Since I was /able/ to run 2 ~nix-env -i~, I assumed it was supported.
+***** Initted hakyll project
+***** Trying to go full fp hipster on it: cabal2nix to build it?
+***** Snag (fixed): Installing haskell layer for spacemacs took forever & froze
+****** Killed spacemacs and things seemed to be fine afterwards
+***** Snag (FIXME): Installing haskell layer deps via nix didn't work
+****** hakyll and hlint conflict with the same error message as before
+****** Trying to use cabal-install instead
+****** Layer instructions are outdated. Ain't supposed to use ~cabal install~
+****** Have to use ~cabal new-install~, [[https://cabal.readthedocs.io/en/latest/nix-local-build.html#cabal-new-install][documented here]].
+****** Before using new-install, have to run ~cabal new-update~. Takes forever!
+****** Getting odd errors, trying to ignore nix and reinstall cabal with itself
+****** ~cabal new-install cabal-install~ fails because of zlib.h missing
+       #+begin_example
+       Missing (or bad) header file: zlib.h
+       Missing (or bad) C library: z
+       #+end_example
+****** ~brew info zlib~ says it's installed though
+****** Pointing cabal manually to the zlib include and lib didn't work
+       #+begin_example
+       cabal new-install cabal-install \
+       --extra-include-dirs=/usr/local/opt/zlib/include \
+       --extra-lib-dirs=/usr/local/opt/zlib/lib
+       #+end_example
+****** Ok I quit for now. Spacemacs is highlighting syntax for Haskell.
+****** There are probably features I'm missing because of missing deps.
+****** But nothing is /breaking/ so far, so I'll get on with Hakyll.
+***** Lesson: trying to dismiss default hakyll tutorial went bad. Use stack.
+****** Spent /hours/ trying to make cabal and nix work together.
+****** And that was just for installing binaries for Spacemacs.
+****** Trying to use cabal2nix for the default hakyll-init project be crazy.
+****** Decided to back down a little and figure out one tool at a time.
+****** I went with the *stack* instructions in the tutorial and it worked.
+****** Cabal was interacting weirdly with nix and system libraries.
+****** Stack does everything in a per-project isolated way, so that helped.
+****** I think cabal does too, but I dunno, stack "just worked." Moving on.
+***** Netlify doesn't support hakyll yet, so I built it locally and deployed.
+***** It was pretty easy. Netlify ftw! It's live now 👉 [[https://agentofuser.com][agentofuser.com]].
+***** I had already set up Cloudflare, so it should even have a [[https://blog.cloudflare.com/cloudflare-onion-service/][.onion alt-svc]].
+***** Done for the day. Phew!
